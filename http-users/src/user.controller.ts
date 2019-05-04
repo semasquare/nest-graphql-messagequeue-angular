@@ -24,7 +24,7 @@ export class UserController {
   }
 
   @Post()
-  addUser(@Body() newUser: User): Promise<void> {
+  addUser(@Body() newUser: User): Promise<User> {
     return this.userService.addUser(newUser);
   }
 }

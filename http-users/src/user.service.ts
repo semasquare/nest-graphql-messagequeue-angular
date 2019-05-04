@@ -20,11 +20,13 @@ export class UserService {
     return this.users.find(user => user.id === id);
   }
 
-  async addUser(newUser: User): Promise<void> {
+  async addUser(newUser: User): Promise<User> {
     this.counter++;
 
     newUser.id = this.counter;
 
     this.users.push(newUser);
+
+    return newUser;
   }
 }

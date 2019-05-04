@@ -9,24 +9,32 @@ import {
 import { CommentService } from './comment.service';
 import { Comment } from './comment.model';
 
-@Controller('comment')
+@Controller()
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Get()
+  @Get('comment')
   getComments(): Promise<Comment[]> {
     return this.commentService.getComments();
   }
 
-  @Get(':id')
+  @Get('comment/:id')
   getSingleComment(
     @Param('id', new ParseIntPipe()) id: number,
   ): Promise<Comment> {
     return this.commentService.getSingleComment(id);
   }
 
-  @Post()
-  addComment(@Body() newComment: Comment): Promise<void> {
+  @Get('commentByUserId/:userId')
+  async getCommentsByUserId(
+    @Param('userId', new ParseIntPipe()) userId: number,
+  ): Promise<Comment[]> {
+    const comments = await this.commentService.getComments();
+    return comments.filter(comment => comment.userId === userId);
+  }
+
+  @Post('comment')
+  addComment(@Body() newComment: Comment): Promise<Comment> {
     return this.commentService.addComment(newComment);
   }
 }

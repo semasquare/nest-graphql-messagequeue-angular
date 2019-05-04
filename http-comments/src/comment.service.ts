@@ -20,11 +20,13 @@ export class CommentService {
     return this.comments.find(comment => comment.id === id);
   }
 
-  async addComment(newComment: Comment): Promise<void> {
+  async addComment(newComment: Comment): Promise<Comment> {
     this.counter++;
 
     newComment.id = this.counter;
 
     this.comments.push(newComment);
+
+    return newComment;
   }
 }
