@@ -8,6 +8,9 @@
     },
     {
       "path": "http-users"
+    },
+    {
+      "path": "graphql-api"
     }
   ],
   "settings": {}
