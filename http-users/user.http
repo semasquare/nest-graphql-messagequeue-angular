@@ -1,0 +1,15 @@
+http://localhost:3001/user
+
+###
+
+http://localhost:3001/user/2
+
+###
+
+POST http://localhost:3001/user
+content-type: application/json
+
+{
+    "name": "Ann Geber",
+    "age": 36
+}

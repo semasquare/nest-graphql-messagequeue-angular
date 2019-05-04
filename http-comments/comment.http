@@ -1,0 +1,15 @@
+http://localhost:3002/comment
+
+###
+
+http://localhost:3002/comment/2
+
+###
+
+POST http://localhost:3002/comment
+content-type: application/json
+
+{
+    "message": "I like this stuff!",
+    "userId": 2
+}
