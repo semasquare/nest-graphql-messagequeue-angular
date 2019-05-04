@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "frontend"
+    },
+    {
+      "path": "http-comments"
+    },
+    {
+      "path": "http-users"
+    }
+  ],
+  "settings": {}
+}
