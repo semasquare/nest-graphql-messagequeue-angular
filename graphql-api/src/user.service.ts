@@ -2,17 +2,28 @@ import { Injectable, Scope } from '@nestjs/common';
 
 import { RESTDataSource, Request } from 'apollo-datasource-rest';
 import { User, UserCreateDto } from './user.model';
+import { InMemoryLRUCache } from 'apollo-server-caching';
 
 @Injectable({ scope: Scope.REQUEST })
 export class UserService extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'http://localhost:3001/user/';
-  }
 
-  // Workaround to disable caching
-  cacheKeyFor(request: Request): string {
-    return request.url + Math.random();
+    /*
+    It is currently not possible to use apollo datasources in a nestjs way like decorators
+    https://stackoverflow.com/questions/54517872/nestjs-graphql-datasources
+    https://github.com/nestjs/nest/issues/945
+
+    Another way would be to make nestjs understands them or
+    don't use datasources and execute http requests with another way
+
+    https://github.com/graphql/dataloader
+    */
+    this.initialize({
+      cache: new InMemoryLRUCache(),
+      context: {},
+    });
   }
 
   async getUsers() {
